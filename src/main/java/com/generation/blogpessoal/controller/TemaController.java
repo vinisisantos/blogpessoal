@@ -27,8 +27,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/temas")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TemaController {
-    
-    @Autowired
+	
+	@Autowired
     private TemaRepository temaRepository;
     
     @GetMapping
@@ -64,6 +64,7 @@ public class TemaController {
             .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
     
+    
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
@@ -74,5 +75,6 @@ public class TemaController {
         
         temaRepository.deleteById(id);              
     }
-
+    
+    
 }
