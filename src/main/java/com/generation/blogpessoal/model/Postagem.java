@@ -16,67 +16,63 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_postagem")
+@Table(name = "tb_postagens")
 public class Postagem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long id;// int, Integer, Long -> BigInt
 	
-	@NotBlank(message = "O atributo Título é Obrigatório")
-	@Size(min = 5, max = 100, message = "Tamanho mínimo: 5, Tamano máximo: 100")
+	@NotBlank(message="O atributo Título é Obrigatório")
+	@Size(min = 5, max = 100, message = "Tamanho minimo: 5, maximo: 100")
 	private String titulo;
 	
-	@NotBlank(message = "O atributo Texto é Obrigatório")
-	@Size(min = 5, max = 100, message = "Tamanho mínimo: 5, Tamano máximo: 100")
+	@NotBlank(message="O atributo Texto é Obrigatório")
+	@Size(min = 10, max = 1000, message = "Tamanho minimo: 10, maximo: 1000")
 	private String texto;
 	
 	@UpdateTimestamp
 	private LocalDateTime data;
 	
-	@ManyToOne // várias postagens pode pertencer a 1 tema (N:1)
-	@JsonIgnoreProperties("postagem") //Para que as postagens não gere um loop infinito nas requisições
+	@ManyToOne	
+	@JsonIgnoreProperties
 	private Tema tema;
 	
-	@ManyToOne // várias postagens pode pertencer a 1 usuário (N:1)
+	@ManyToOne
 	@JsonIgnoreProperties("postagem")
 	private Usuario usuario;
-	
+
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getTitulo() {
 		return titulo;
 	}
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	public String getTexto() {
 		return texto;
 	}
+
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+
 	public LocalDateTime getData() {
 		return data;
 	}
+
 	public void setData(LocalDateTime data) {
 		this.data = data;
-	}
-	public Tema getTema() {
-		return tema;
-	}
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
+	}	
+
 }
